@@ -19,3 +19,14 @@ resource "aws_subnet" "public_subnet" {
   cidr_block        = "10.0.16.0/20"
   availability_zone = "ap-northeast-1a"
 }
+
+# terraform.tfstateにはterraform applyした結果が保存されている
+# tfstateはS3などのクラウドストレージに保存しよう
+# これでs3にプラグインできる
+terraform {
+  backend "s3" {
+    bucket = "customaddone-sample-terraform"
+    key    = "test/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
