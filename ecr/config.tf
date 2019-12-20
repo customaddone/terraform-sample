@@ -1,4 +1,5 @@
 # awsを使います
+# config使って環境設定しようね
 provider "aws" {
   region = "ap-northeast-1"
 }
@@ -9,7 +10,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "customaddone-sample-terraform"
-    key    = "sample/ecr/terraform.tfstate"
+    key    = "sample/sampleEC2"
     region = "ap-northeast-1"
   }
 }
