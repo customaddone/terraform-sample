@@ -5,7 +5,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "customaddone-sample-terraform"
-    key    = "sample/vpc"
+    key    = "sample/ecs"
     region = "ap-northeast-1"
   }
 }
