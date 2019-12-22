@@ -29,7 +29,7 @@ resource "aws_lb" "example" {
   internal                   = false
   idle_timeout               = 60
   # 削除保護
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   # 下記のようにデータを参照する
   subnets = [
