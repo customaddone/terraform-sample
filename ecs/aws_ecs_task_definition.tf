@@ -13,11 +13,12 @@ resource "aws_ecs_task_definition" "example" {
   # Fargateを使用する場合は"awsvpc"決め打ち
   network_mode = "awsvpc"
 
+# 503出てたのはこれのせいらしい
   container_definitions = <<EOL
  [
    {
      "name": "nginx",
-     "image": "nginx:1.14",
+     "image": "nginx:latest",
      "portMappings": [
        {
          "containerPort": 80,
