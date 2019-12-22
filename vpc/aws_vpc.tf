@@ -11,6 +11,8 @@ resource "aws_vpc" "example" {
   }
 }
 
+# 送信元で下記のように書く
+# terraform applyする
 output "example_id" {
   value = "${aws_vpc.example.id}"
 }
