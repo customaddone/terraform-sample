@@ -2,6 +2,7 @@
 resource "aws_route53_record" "example" {
   zone_id = data.aws_route53_zone.example.zone_id
   name    = data.aws_route53_zone.example.name
+  # DNSレコードタイプ
   type    = "A"
 
   alias {
