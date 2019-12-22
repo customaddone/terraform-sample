@@ -1,5 +1,24 @@
 # ALBはAWSが提供するロードバランサーです
 # HTTPSでアクセスできるよう設定します
+# remote_state を設定し vpc という名前で参照できるようにしています
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = "customaddone-sample-terraform"
+    key    = "sample/vpc/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
+
+data "terraform_remote_state" "s3" {
+  backend = "s3"
+  config = {
+    bucket = "customaddone-sample-terraform"
+    key    = "sample/s3/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
+
 resource "aws_lb" "example" {
   # 名前はnameで設定します
   name                       = "example"
@@ -12,12 +31,12 @@ resource "aws_lb" "example" {
   enable_deletion_protection = true
 
   subnets = [
-    aws_subnet.public_0.id,
-    aws_subnet.public_1.id,
+    data.terraform_remote_state.vpc.outputs.public_0,
+    data.terraform_remote_state.vpc.outputs.public_0,
   ]
 
   access_logs {
-    bucket  = aws_s3_bucket.alb_log.id
+    bucket  = data.terraform_remote_state.s3.outputs.alb_log_id
     enabled = true
   }
 

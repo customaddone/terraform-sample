@@ -13,3 +13,11 @@ resource "aws_subnet" "public_1" {
   availability_zone       = "ap-northeast-1c"
   map_public_ip_on_launch = true
 }
+
+output "public_0" {
+  value = "${aws_subnet.public_0.id}"
+}
+
+output "public_1" {
+  value = "${aws_subnet.public_1.id}"
+}
