@@ -10,7 +10,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "customaddone-sample-terraform"
-    key    = "sample/iam"
+    key    = "sample/iam/terraform.tfstate"
     region = "ap-northeast-1"
   }
 }

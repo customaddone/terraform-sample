@@ -15,16 +15,16 @@ resource "aws_ecs_service" "example" {
     security_groups  = [module.nginx_sg.security_group_id]
 
     subnets = [
-      aws_subnet.private_0.id,
-      aws_subnet.private_1.id,
+      data.terraform_remote_state.vpc.outputs.public_0,
+      data.terraform_remote_state.vpc.outputs.public_1,
     ]
   }
 
-  # load_balancer {
-    #target_group_arn = aws_lb_target_group.example.arn
-    #container_name   = "example"
-    #container_port   = 80
-  #}
+  load_balancer {
+    target_group_arn = data.terraform_remote_state.alb.outputs.target_group_arn
+    container_name   = "example"
+    container_port   = 80
+  }
 
   lifecycle {
     ignore_changes = [task_definition]
@@ -32,9 +32,9 @@ resource "aws_ecs_service" "example" {
 }
 
 module "nginx_sg" {
-  source      = "./security_group"
+  source      = "./aws_security_group"
   name        = "nginx-sg"
-  vpc_id      = aws_vpc.example.id
+  vpc_id      = data.terraform_remote_state.vpc.outputs.example_id
   port        = 80
-  cidr_blocks = [aws_vpc.example.cidr_block]
+  cidr_blocks = [data.terraform_remote_state.vpc.outputs.cidr_block]
 }

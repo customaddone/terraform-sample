@@ -23,3 +23,7 @@ resource "aws_lb_target_group" "example" {
   # ロードバランサーとターゲットグループとECSサービスを同時に作成するとエラーになります
   depends_on = [aws_lb.example]
 }
+
+output "target_group_arn" {
+  value = "${aws_lb_target_group.example.arn}"
+}
