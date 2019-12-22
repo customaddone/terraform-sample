@@ -10,6 +10,7 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+# AWSのロードバランサーに書いてあるDNSでアクセスする
 data "terraform_remote_state" "alb" {
   backend = "s3"
   config = {
