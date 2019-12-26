@@ -1,8 +1,5 @@
-# IAMロールとIAMポリシーの名前
 variable "name" {}
-# ポリシードキュメント
 variable "policy" {}
-# IAMロールを関連づけるAWSのサービス識別子
 variable "identifier" {}
 
 resource "aws_iam_role" "default" {

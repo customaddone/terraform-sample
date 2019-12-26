@@ -68,3 +68,7 @@ resource "aws_ecs_service" "example" {
       container_port   = "80"
   }
 }
+
+output "service_name" {
+  value = "${aws_ecs_service.example.name}"
+}

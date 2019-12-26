@@ -20,3 +20,7 @@ data "terraform_remote_state" "alb" {
     region = "ap-northeast-1"
   }
 }
+
+output "cluster_name" {
+  value = "${aws_ecs_cluster.example.name}"
+}

@@ -8,3 +8,21 @@ data "aws_iam_policy_document" "allow_describe_regions" {
     resources = ["*"]
   }
 }
+
+data "terraform_remote_state" "ecs" {
+  backend = "s3"
+  config = {
+    bucket = "customaddone-sample-terraform"
+    key    = "sample/ecs/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
+
+data "terraform_remote_state" "s3" {
+  backend = "s3"
+  config = {
+    bucket = "customaddone-sample-terraform"
+    key    = "sample/s3/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
