@@ -64,7 +64,7 @@ resource "aws_ecs_service" "example" {
   # ECSタスクの起動後に紐付けるELBターゲットグループ
   load_balancer{
       target_group_arn = data.terraform_remote_state.alb.outputs.target_group_arn
-      container_name   = "nginx"
+      container_name   = "example"
       container_port   = "80"
   }
 }

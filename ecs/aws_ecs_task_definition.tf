@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "example" {
   container_definitions = <<EOL
  [
    {
-     "name": "nginx",
+     "name": "example",
      "image": "nginx:latest",
      "portMappings": [
        {
