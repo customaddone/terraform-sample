@@ -5,7 +5,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "customaddone-private-pragmatic-terraform"
-    key    = "sample/iam/terraform.tfstate"
+    key    = "sample/s3/terraform.tfstate"
     region = "ap-northeast-1"
   }
 }
