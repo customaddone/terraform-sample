@@ -36,7 +36,3 @@ data "aws_iam_policy_document" "codebuild" {
 
 # ポリシードキュメントを保持するリソースです
 # ポリシー名とポリシードキュメントを設定します
-resource "aws_iam_policy" "example" {
-  name        = "example"
-  policy      = data.aws_iam_policy_document.codebuild.json
-}
