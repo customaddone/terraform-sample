@@ -42,3 +42,7 @@ resource "aws_lb_listener_rule" "example" {
     values = ["/*"]
   }
 }
+
+output "lb_target_group_arn" {
+  value = aws_lb_target_group.example.arn
+}

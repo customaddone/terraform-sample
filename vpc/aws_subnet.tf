@@ -36,3 +36,11 @@ output "public_0" {
 output "public_1" {
   value = aws_subnet.public_1.id
 }
+
+output "private_0" {
+  value = aws_subnet.private_0.id
+}
+
+output "private_1" {
+  value = aws_subnet.private_1.id
+}
