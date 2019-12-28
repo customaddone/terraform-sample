@@ -35,3 +35,7 @@ module "nginx_sg" {
   port        = 80
   cidr_blocks = ["10.0.0.0/16"]
 }
+
+output "ecs_service_name" {
+  value = aws_ecs_service.example.name
+}
