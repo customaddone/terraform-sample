@@ -29,10 +29,10 @@ resource "aws_subnet" "private_1" {
   map_public_ip_on_launch = false
 }
 
-output "private_0" {
+output "public_0" {
   value = aws_subnet.public_0.id
 }
 
-output "private_1" {
+output "public_1" {
   value = aws_subnet.public_1.id
 }
