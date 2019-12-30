@@ -23,6 +23,15 @@ data "terraform_remote_state" "alb" {
   }
 }
 
+data "terraform_remote_state" "iam" {
+  backend = "s3"
+  config = {
+    bucket = "customaddone-private-pragmatic-terraform"
+    key    = "sample/iam/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
+
 output "cluster_name" {
   value = aws_ecs_cluster.example.name
 }
