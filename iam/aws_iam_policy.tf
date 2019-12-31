@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "deploy" {
+data "aws_iam_policy_document" "ec2" {
   statement {
     effect    = "Allow"
     resources = ["*"]
@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "deploy" {
   }
 }
 
-data "aws_iam_policy_document" "ecs_instance_policy" {
+data "aws_iam_policy_document" "ecs" {
   statement {
     effect    = "Allow"
     resources = ["*"]
