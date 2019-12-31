@@ -1,17 +1,13 @@
 [
   {
-    "name": "example",
-    "image": "183344260146.dkr.ecr.ap-northeast-1.amazonaws.com/app:latest",
-    "cpu": 333,
-    "memoryReservation": 600,
+    "name": "nginx",
+    "image": "nginx:latest",
     "essential": true,
     "portMappings": [
       {
-        "hostPort": 0,
         "protocol": "tcp",
-        "containerPort": 3000
+        "containerPort": 80
       }
-    ],
-    "command": ["bundle", "exec", "pumactl", "start"],
+    ]
   }
 ]
