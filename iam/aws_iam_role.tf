@@ -23,7 +23,7 @@ output "ec2_role_arn" {
   value = module.ec2_role.iam_role_arn
 }
 
-output "ecs_role_arn" {
+output "ecs_task_role_arn" {
   value = module.ecs_role.iam_role_arn
 }
 

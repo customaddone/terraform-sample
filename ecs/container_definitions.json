@@ -2,6 +2,8 @@
   {
     "name": "nginx",
     "image": "nginx:latest",
+    "cpu": 333,
+    "memoryReservation": 512,
     "essential": true,
     "portMappings": [
       {
