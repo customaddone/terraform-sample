@@ -1,32 +1,35 @@
-#EC2用
-module "ec2_role" {
+module "codebuild_role" {
   source     = "./aws_iam_module"
-  name       = "ec2_role"
-  identifier = "ec2.amazonaws.com"
-  policy     = data.aws_iam_policy_document.ec2.json
+  name       = "codebuild"
+  identifier = "codebuild.amazonaws.com"
+  policy     = data.aws_iam_policy_document.codebuild.json
 }
 
-resource "aws_iam_instance_profile" "ecs_instance_profile" {
-  name = "ecs-instance-profile"
-  role = module.ec2_role.iam_role_name
-}
-
-#ECS用
-module "ecs_role" {
+module "codepipeline_role" {
   source     = "./aws_iam_module"
-  name       = "ecs_role"
-  identifier = "ecs.amazonaws.com"
-  policy     = data.aws_iam_policy_document.ecs.json
+  name       = "codepipeline"
+  identifier = "codepipeline.amazonaws.com"
+  policy     = data.aws_iam_policy_document.codepipeline.json
 }
 
-output "ec2_role_arn" {
-  value = module.ec2_role.iam_role_arn
+output "codebuild_role_arn" {
+  value = module.codebuild_role.iam_role_arn
 }
 
-output "ecs_task_role_arn" {
-  value = module.ecs_role.iam_role_arn
+data "terraform_remote_state" "ecs" {
+  backend = "s3"
+  config = {
+    bucket = "customaddone-private-pragmatic-terraform"
+    key    = "sample/ecs/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
 }
 
-output "ecs_instance_profile_name" {
-      value = aws_iam_instance_profile.ecs_instance_profile.name
+data "terraform_remote_state" "s3" {
+  backend = "s3"
+  config = {
+    bucket = "customaddone-private-pragmatic-terraform"
+    key    = "sample/s3/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
 }

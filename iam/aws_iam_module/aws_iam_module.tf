@@ -1,8 +1,5 @@
-# IAMロールとIAMポリシーの名前
 variable "name" {}
-# ポリシードキュメント
 variable "policy" {}
-# IAMロールを関連づけるAWSのサービス識別子
 variable "identifier" {}
 
 resource "aws_iam_role" "default" {
@@ -26,7 +23,6 @@ resource "aws_iam_policy" "default" {
   policy = var.policy
 }
 
-# ロールとポリシーをアタッチメント
 resource "aws_iam_role_policy_attachment" "default" {
   role       = aws_iam_role.default.name
   policy_arn = aws_iam_policy.default.arn
@@ -36,7 +32,6 @@ output "iam_role_arn" {
   value = aws_iam_role.default.arn
 }
 
-#moduleから本体に値を送る際に必要
 output "iam_role_name" {
   value = aws_iam_role.default.name
 }

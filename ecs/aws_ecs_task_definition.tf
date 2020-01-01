@@ -5,6 +5,6 @@ resource "aws_ecs_task_definition" "example" {
   memory                   = "512"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = data.terraform_remote_state.iam.outputs.ecs_task_role_arn
+  execution_role_arn       = data.terraform_remote_state.iam.outputs.codebuild_role_arn
   container_definitions    = file("./container_definitions.json")
 }
