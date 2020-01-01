@@ -9,5 +9,16 @@
         "containerPort": 80
       }
     ]
+  },
+  {
+    "name": "app",
+    "image": "php:latest",
+    "essential": true,
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 3000
+      }
+    ]
   }
 ]
