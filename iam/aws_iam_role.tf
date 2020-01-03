@@ -1,3 +1,4 @@
+#ecs-task用
 data "template_file" "task-role-template" {
   template = file("./task_role.json")
 }
@@ -12,22 +13,43 @@ resource "aws_iam_role_policy_attachment" "task-role-attachment" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-module "codebuild_role" {
-  source     = "./aws_iam_module"
-  name       = "codebuild"
-  identifier = "codebuild.amazonaws.com"
-  policy     = data.aws_iam_policy_document.codebuild.json
+
+
+#ec2用
+resource "aws_iam_role" "ecs_instance_role" {
+  name = "ecs_instance_role"
+  path = "/"
+  assume_role_policy = file("./ec2_assume_role_policy.json")
 }
 
-module "codepipeline_role" {
-  source     = "./aws_iam_module"
-  name       = "codepipeline"
-  identifier = "codepipeline.amazonaws.com"
-  policy     = data.aws_iam_policy_document.codepipeline.json
+resource "aws_iam_instance_profile" "ecs_instance_profile" {
+  name = "ecs-instance-profile"
+  role = aws_iam_role.ecs_instance_role.name
 }
+
+
+
+#ecs用
+resource "aws_iam_policy" "ecs_instance_policy" {
+  name        = "ecs-instance-policy"
+  path        = "/"
+  description = ""
+  policy      = data.aws_iam_policy_document.ecs.json
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_instance_role_attach" {
+  role = aws_iam_role.ecs_instance_role.name
+  policy_arn = aws_iam_policy.ecs_instance_policy.arn
+}
+
+
 
 output "ecs_role_arn" {
   value = aws_iam_role.task-role.arn
+}
+
+output "ecs_instance_profile_name" {
+  value = aws_iam_instance_profile.ecs_instance_profile.name
 }
 
 data "terraform_remote_state" "ecs" {

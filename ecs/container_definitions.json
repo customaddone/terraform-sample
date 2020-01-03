@@ -2,31 +2,23 @@
   {
     "name": "example",
     "image": "nginx:latest",
+    "cpu": 333,
+    "memoryReservation": 600,
     "essential": true,
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-region": "ap-northeast-1",
-        "awslogs-stream-prefix": "nginx",
-        "awslogs-group": "/ecs/example"
-      }
-    },
     "portMappings": [
       {
+        "hostPort": 80,
         "protocol": "tcp",
         "containerPort": 80
       }
-    ]
-  },
-  {
-    "name": "app",
-    "image": "php:latest",
-    "essential": true,
-    "portMappings": [
-      {
-        "protocol": "tcp",
-        "containerPort": 8888
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "example",
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "service"
       }
-    ]
+    }
   }
 ]

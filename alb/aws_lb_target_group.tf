@@ -3,7 +3,6 @@
 resource "aws_lb_target_group" "example" {
   name                 = "example"
   # ターゲットの種類
-  target_type          = "ip"
   # ターゲットにipを指定した場合は以下も書いてね
   vpc_id               = data.terraform_remote_state.vpc.outputs.example_id
   port                 = 80
