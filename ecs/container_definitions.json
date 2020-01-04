@@ -1,10 +1,13 @@
 [
   {
     "name": "example",
-    "image": "nginx:latest",
-    "cpu": 333,
-    "memoryReservation": 600,
+    "image": "183344260146.dkr.ecr.ap-northeast-1.amazonaws.com/example:latest",
+    "cpu": 128,
+    "memoryReservation": 256,
     "essential": true,
+    "links": [
+      "app"
+    ],
     "portMappings": [
       {
         "hostPort": 80,
@@ -20,5 +23,27 @@
         "awslogs-stream-prefix": "service"
       }
     }
-  }
+  },
+  {
+     "name": "app",
+     "image": "183344260146.dkr.ecr.ap-northeast-1.amazonaws.com/app:latest",
+     "cpu": 128,
+     "memoryReservation": 256,
+     "essential": true,
+     "portMappings": [
+       {
+         "hostPort": 8080,
+         "protocol": "tcp",
+         "containerPort": 8080
+       }
+     ],
+     "logConfiguration": {
+       "logDriver": "awslogs",
+       "options": {
+         "awslogs-group": "app",
+         "awslogs-region": "ap-northeast-1",
+         "awslogs-stream-prefix": "app"
+       }
+     }
+   }
 ]
